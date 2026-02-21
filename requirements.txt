@@ -1,0 +1,5 @@
+streamlit>=1.40
+pennylane>=0.39
+plotly>=5.20
+numpy>=1.26
+python-dotenv>=1.0
