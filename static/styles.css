@@ -1,0 +1,644 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   QUANTUM VOID DARK THEME — Quantum Dice App
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --q-black:       #0a0a1a;
+  --q-dark:        #0d0d2b;
+  --q-darkest:     #07071a;
+  --q-purple:      #7b2fff;
+  --q-purple-dim:  #4a1a99;
+  --q-purple-glow: rgba(123, 47, 255, 0.35);
+  --q-cyan:        #00e5ff;
+  --q-cyan-dim:    rgba(0, 229, 255, 0.25);
+  --q-green:       #00ff88;
+  --q-text:        #e0e0ff;
+  --q-text-dim:    #8888aa;
+  --q-border:      rgba(123, 47, 255, 0.30);
+  --q-card-bg:     rgba(13, 13, 43, 0.85);
+  --grad-bg:       linear-gradient(135deg, #0a0a1a 0%, #0d0d2b 55%, #12003a 100%);
+}
+
+/* ─── Base App ───────────────────────────────────────────────────────────── */
+.stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"] {
+  background: var(--grad-bg) !important;
+}
+
+[data-testid="stAppViewContainer"] > .main {
+  background: transparent !important;
+}
+
+.main .block-container {
+  background: transparent !important;
+  padding-top: 1rem !important;
+  max-width: 1100px !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--q-dark); }
+::-webkit-scrollbar-thumb { background: var(--q-purple-dim); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--q-purple); }
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.quantum-header {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 2.5rem 1rem 1.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(-45deg, #0a0a1a, #16003a, #001a3a, #1a003e);
+  background-size: 400% 400%;
+  animation: gradient-shift 9s ease infinite;
+  border: 1px solid var(--q-border);
+  box-shadow: 0 0 60px rgba(123, 47, 255, 0.18), inset 0 0 80px rgba(0,0,0,0.4);
+}
+
+.quantum-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(123,47,255,0.18) 1px, transparent 1px),
+    radial-gradient(circle, rgba(0,229,255,0.10) 1px, transparent 1px);
+  background-size: 32px 32px, 64px 64px;
+  background-position: 0 0, 16px 16px;
+  animation: particle-drift 12s linear infinite;
+  pointer-events: none;
+}
+
+.quantum-title {
+  font-family: "Courier New", monospace !important;
+  font-size: clamp(2rem, 5vw, 3.4rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.15em !important;
+  background: linear-gradient(90deg, var(--q-cyan), var(--q-purple), var(--q-cyan));
+  background-size: 200% auto;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: shimmer 4s linear infinite;
+  margin: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
+.quantum-subtitle {
+  font-family: "Courier New", monospace !important;
+  color: var(--q-text-dim) !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.08em !important;
+  margin-top: 0.4rem !important;
+  position: relative;
+  z-index: 1;
+}
+
+.quantum-badge {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.3rem 1rem;
+  background: rgba(123,47,255,0.15);
+  border: 1px solid var(--q-border);
+  border-radius: 20px;
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: var(--q-cyan);
+  letter-spacing: 0.06em;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes particle-drift {
+  0%   { transform: translateY(0) translateX(0); }
+  50%  { transform: translateY(-8px) translateX(5px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 12px var(--q-purple-glow); }
+  50%       { box-shadow: 0 0 28px rgba(123,47,255,0.6), 0 0 8px rgba(0,229,255,0.3); }
+}
+
+@keyframes collapse-flash {
+  0%   { opacity: 0; transform: scale(0.7); }
+  40%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1.0); }
+}
+
+@keyframes spin-in {
+  0%   { transform: rotate(-180deg) scale(0.4); opacity: 0; }
+  100% { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ─── Tabs ───────────────────────────────────────────────────────────────── */
+[data-testid="stTabs"] {
+  gap: 4px;
+}
+
+[data-baseweb="tab-list"] {
+  background: rgba(13,13,43,0.6) !important;
+  border-radius: 10px 10px 0 0 !important;
+  padding: 0.3rem 0.3rem 0 !important;
+  gap: 2px !important;
+  border-bottom: 1px solid var(--q-border) !important;
+}
+
+[data-baseweb="tab"] {
+  background: transparent !important;
+  color: var(--q-text-dim) !important;
+  font-family: monospace !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.03em !important;
+  border-radius: 8px 8px 0 0 !important;
+  padding: 0.45rem 0.85rem !important;
+  transition: all 0.25s ease !important;
+  border: none !important;
+}
+
+[data-baseweb="tab"]:hover {
+  background: rgba(123,47,255,0.12) !important;
+  color: var(--q-text) !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+  background: rgba(123,47,255,0.22) !important;
+  color: var(--q-cyan) !important;
+  border-bottom: 2px solid var(--q-cyan) !important;
+  font-weight: 600 !important;
+}
+
+[data-testid="stTabsContent"] {
+  background: rgba(13,13,43,0.55) !important;
+  border: 1px solid var(--q-border) !important;
+  border-top: none !important;
+  border-radius: 0 0 12px 12px !important;
+  padding: 1.4rem 1.2rem !important;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+.stButton > button {
+  background: linear-gradient(135deg, #5a1acc 0%, #7b2fff 50%, #4a1a99 100%) !important;
+  border: 1px solid rgba(123,47,255,0.55) !important;
+  color: #ffffff !important;
+  font-family: "Courier New", monospace !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  padding: 0.55rem 1.8rem !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 20px var(--q-purple-glow) !important;
+  transition: all 0.25s ease !important;
+  animation: pulse-glow 3s ease-in-out infinite !important;
+  cursor: pointer !important;
+}
+
+.stButton > button:hover {
+  background: linear-gradient(135deg, #7b2fff 0%, #9b4fff 50%, #6b1fff 100%) !important;
+  box-shadow: 0 0 35px rgba(123,47,255,0.7), 0 4px 15px rgba(0,0,0,0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+.stButton > button:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 0 15px var(--q-purple-glow) !important;
+}
+
+/* Secondary / outline button variant */
+.stButton > button[kind="secondary"] {
+  background: transparent !important;
+  border: 1px solid var(--q-border) !important;
+  color: var(--q-cyan) !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* ─── Inputs & Sliders ───────────────────────────────────────────────────── */
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div {
+  background: rgba(10,10,40,0.8) !important;
+  border: 1px solid var(--q-border) !important;
+  border-radius: 8px !important;
+  color: var(--q-text) !important;
+  font-family: monospace !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+  border-color: var(--q-cyan) !important;
+  box-shadow: 0 0 12px var(--q-cyan-dim) !important;
+  outline: none !important;
+}
+
+/* Slider track */
+[data-testid="stSlider"] > div > div > div > div {
+  background: var(--q-purple-dim) !important;
+}
+[data-testid="stSlider"] > div > div > div > div > div {
+  background: var(--q-purple) !important;
+  box-shadow: 0 0 10px var(--q-purple-glow) !important;
+}
+
+/* Checkboxes */
+.stCheckbox label span[data-testid="stWidgetLabel"] {
+  color: var(--q-text-dim) !important;
+  font-family: monospace !important;
+  font-size: 0.88rem !important;
+}
+
+/* ─── Circuit diagram ────────────────────────────────────────────────────── */
+.circuit-diagram {
+  background: rgba(5,5,20,0.9);
+  border: 1px solid var(--q-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.88rem;
+  margin: 0.8rem 0;
+  overflow-x: auto;
+}
+
+.circuit-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0.28rem 0;
+  white-space: nowrap;
+}
+
+.qubit-ket {
+  color: var(--q-cyan);
+  min-width: 2.8rem;
+  font-weight: 600;
+}
+
+.circuit-wire {
+  color: rgba(123,47,255,0.6);
+  letter-spacing: -1px;
+}
+
+.gate-box {
+  display: inline-block;
+  background: rgba(123,47,255,0.25);
+  border: 1px solid var(--q-purple);
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 0.05rem 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 0 8px var(--q-purple-glow);
+}
+
+.measure-box {
+  display: inline-block;
+  background: rgba(0,229,255,0.12);
+  border: 1px solid var(--q-cyan);
+  border-radius: 4px;
+  color: var(--q-cyan);
+  padding: 0.05rem 0.45rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ─── Result cards ───────────────────────────────────────────────────────── */
+.result-card {
+  background: var(--q-card-bg);
+  border: 1px solid var(--q-border);
+  border-radius: 16px;
+  padding: 1.6rem 1.4rem;
+  text-align: center;
+  margin: 1rem 0;
+  box-shadow: 0 0 30px rgba(123,47,255,0.15);
+  animation: collapse-flash 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at center, rgba(0,229,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.result-label {
+  font-family: monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--q-text-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.result-value-large {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-family: monospace;
+  color: var(--q-cyan);
+  text-shadow: 0 0 30px var(--q-cyan), 0 0 60px rgba(0,229,255,0.3);
+  line-height: 1.1;
+  animation: spin-in 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.dice-unicode {
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 20px var(--q-cyan));
+  animation: spin-in 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.result-prob {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--q-text-dim);
+  margin-top: 0.6rem;
+}
+
+/* ─── Bit display ────────────────────────────────────────────────────────── */
+.bits-display {
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+}
+
+.bit-zero {
+  color: var(--q-purple);
+  text-shadow: 0 0 6px var(--q-purple-glow);
+}
+
+.bit-one {
+  color: var(--q-cyan);
+  text-shadow: 0 0 6px var(--q-cyan-dim);
+}
+
+/* ─── Group / Lottery cards ──────────────────────────────────────────────── */
+.group-card {
+  background: rgba(13,13,43,0.75);
+  border: 1px solid var(--q-border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  animation: collapse-flash 0.5s ease-out;
+}
+
+.group-title {
+  font-family: monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--q-cyan);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.member-chip {
+  display: inline-block;
+  background: rgba(123,47,255,0.18);
+  border: 1px solid rgba(123,47,255,0.4);
+  border-radius: 20px;
+  padding: 0.22rem 0.7rem;
+  font-size: 0.85rem;
+  font-family: monospace;
+  color: var(--q-text);
+  margin: 0.18rem;
+}
+
+.winner-chip {
+  display: inline-block;
+  background: rgba(0,255,136,0.15);
+  border: 1px solid rgba(0,255,136,0.5);
+  border-radius: 20px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.9rem;
+  font-family: monospace;
+  color: var(--q-green);
+  margin: 0.2rem;
+  box-shadow: 0 0 10px rgba(0,255,136,0.18);
+}
+
+/* ─── Password display ───────────────────────────────────────────────────── */
+.password-box {
+  background: rgba(5,5,20,0.9);
+  border: 1px solid var(--q-cyan);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  font-family: "Courier New", monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.12em;
+  color: var(--q-cyan);
+  text-shadow: 0 0 10px var(--q-cyan-dim);
+  word-break: break-all;
+  text-align: center;
+  animation: collapse-flash 0.6s ease-out;
+  box-shadow: 0 0 20px rgba(0,229,255,0.1), inset 0 0 30px rgba(0,0,0,0.5);
+  margin: 0.8rem 0;
+}
+
+.strength-bar-wrap {
+  margin: 0.4rem 0;
+}
+
+.strength-quantum   { color: var(--q-cyan);  }
+.strength-very-strong { color: #00ff88; }
+.strength-strong    { color: #88ff44; }
+.strength-moderate  { color: #ffcc00; }
+.strength-weak      { color: #ff4444; }
+
+/* ─── Color palette ──────────────────────────────────────────────────────── */
+.color-swatch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: collapse-flash 0.5s ease-out;
+}
+
+.color-block {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.12);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.color-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+}
+
+.color-hex {
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: var(--q-text-dim);
+  margin-top: 0.35rem;
+  letter-spacing: 0.04em;
+}
+
+.color-name {
+  font-family: monospace;
+  font-size: 0.65rem;
+  color: var(--q-text-dim);
+  opacity: 0.7;
+}
+
+/* ─── Playlist ────────────────────────────────────────────────────────────── */
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(13,13,43,0.6);
+  border: 1px solid rgba(123,47,255,0.2);
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  margin-bottom: 0.4rem;
+  font-family: monospace;
+  font-size: 0.88rem;
+  color: var(--q-text);
+  animation: collapse-flash 0.4s ease-out;
+}
+
+.playlist-idx {
+  color: var(--q-cyan);
+  min-width: 1.8rem;
+  font-weight: 600;
+}
+
+/* ─── Info / metric boxes ────────────────────────────────────────────────── */
+[data-testid="metric-container"] {
+  background: var(--q-card-bg) !important;
+  border: 1px solid var(--q-border) !important;
+  border-radius: 10px !important;
+  padding: 0.8rem 1rem !important;
+}
+
+[data-testid="metric-container"] [data-testid="stMetricValue"] {
+  color: var(--q-cyan) !important;
+  font-family: monospace !important;
+  font-size: 1.6rem !important;
+}
+
+[data-testid="metric-container"] [data-testid="stMetricLabel"] {
+  color: var(--q-text-dim) !important;
+  font-family: monospace !important;
+  font-size: 0.78rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* ─── Info / warning boxes ───────────────────────────────────────────────── */
+[data-testid="stAlert"] {
+  background: rgba(123,47,255,0.10) !important;
+  border: 1px solid var(--q-border) !important;
+  border-radius: 8px !important;
+  color: var(--q-text) !important;
+  font-family: monospace !important;
+}
+
+/* ─── Spinner ─────────────────────────────────────────────────────────────── */
+[data-testid="stSpinner"] > div {
+  border-color: var(--q-purple) transparent transparent transparent !important;
+}
+
+/* ─── Labels & text ──────────────────────────────────────────────────────── */
+label, .stWidgetLabel {
+  color: var(--q-text-dim) !important;
+  font-family: monospace !important;
+  font-size: 0.85rem !important;
+}
+
+h1, h2, h3, h4 {
+  font-family: monospace !important;
+  color: var(--q-text) !important;
+}
+
+p, li {
+  color: var(--q-text-dim) !important;
+  font-family: monospace !important;
+  font-size: 0.88rem !important;
+}
+
+code {
+  background: rgba(123,47,255,0.18) !important;
+  color: var(--q-cyan) !important;
+  border-radius: 4px !important;
+  padding: 0.1em 0.4em !important;
+  font-family: monospace !important;
+}
+
+/* ─── Divider ─────────────────────────────────────────────────────────────── */
+hr {
+  border: none !important;
+  border-top: 1px solid var(--q-border) !important;
+  margin: 1rem 0 !important;
+}
+
+/* ─── Expander ────────────────────────────────────────────────────────────── */
+[data-testid="stExpander"] {
+  background: rgba(13,13,43,0.6) !important;
+  border: 1px solid var(--q-border) !important;
+  border-radius: 8px !important;
+}
+
+[data-testid="stExpander"] summary {
+  color: var(--q-text-dim) !important;
+  font-family: monospace !important;
+}
+
+/* ─── Sidebar (if shown) ─────────────────────────────────────────────────── */
+section[data-testid="stSidebar"] {
+  background: rgba(7,7,26,0.95) !important;
+  border-right: 1px solid var(--q-border) !important;
+}
+
+/* ─── Responsive tweaks ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .main .block-container {
+    padding: 0.5rem !important;
+  }
+  .quantum-header {
+    padding: 1.5rem 0.8rem 1.2rem !important;
+  }
+  .result-value-large {
+    font-size: 3rem !important;
+  }
+  .dice-unicode {
+    font-size: 4rem !important;
+  }
+  [data-baseweb="tab"] {
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.5rem !important;
+  }
+}
